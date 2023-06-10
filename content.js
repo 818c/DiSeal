@@ -1,7 +1,7 @@
 let enabled = false;
 let refreshEnabled = false;
-let delay = 1000; 
-let buydelay = 50;// Default delay time in milliseconds
+let delay = 400;
+let buydelay = 50; // Default delay time in milliseconds
 let refreshIntervalId;
 let buyIntervalId;
 
@@ -23,31 +23,59 @@ function refreshItems() {
   }
 }
 
+function startBuyInterval() {
+  if (!buyIntervalId) {
+    buyIntervalId = setInterval(snipeitem, buydelay); // Start the refresh action
+  }
+}
+
+function stopBuyInterval() {
+  if (buyIntervalId) {
+    clearInterval(buyIntervalId); // Stop the refresh action
+    buyIntervalId = null;
+  }
+}
+
+chrome.storage.local.get(['deviceID'], function(result) {
+  const deviceID = result.deviceID;
+
+  if (deviceID) {
+    // Device ID exists, enable the extension
+    enabled = true;
+    startBuyInterval();
+
+    chrome.runtime.sendMessage({ type: 'saveSettings', settings: { enabled: enabled } });
+  }
+});
+
 chrome.runtime.onMessage.addListener(function(request) {
   if (request.enabled !== undefined) {
     enabled = request.enabled;
-    if (!enabled && buyIntervalId) {
-      clearInterval(buyIntervalId); // Stop the buy action when disabled
+    if (!enabled) {
+      stopBuyInterval(); // Stop the buy action when disabled
       refreshIntervalId = null;
     } else if (enabled && !buyIntervalId) {
-      buyIntervalId = setInterval(snipeitem, buydelay); // Start the refresh action if enabled
+      startBuyInterval(); // Start the buy action if enabled
     }
+    chrome.runtime.sendMessage({ type: 'saveSettings', settings: { enabled: enabled } });
   }
   if (request.buydelay !== undefined) {
     buydelay = request.buydelay;
     if (enabled && buyIntervalId) {
       clearInterval(buyIntervalId); // Clear the previous interval
-      buyIntervalId = setInterval(snipeitem, buydelay); // Start a new interval with the updated delay
+      startBuyInterval(); // Start a new interval with the updated delay
     }
+    chrome.runtime.sendMessage({ type: 'saveSettings', settings: { buydelay: buydelay } });
   }
   if (request.refreshEnabled !== undefined) {
     refreshEnabled = request.refreshEnabled;
-    if (!refreshEnabled && refreshIntervalId) {
+    if (!refreshEnabled) {
       clearInterval(refreshIntervalId); // Stop the refresh action when disabled
       refreshIntervalId = null;
     } else if (refreshEnabled && !refreshIntervalId) {
       refreshIntervalId = setInterval(refreshItems, delay); // Start the refresh action if enabled
     }
+    chrome.runtime.sendMessage({ type: 'saveSettings', settings: { refreshEnabled: refreshEnabled } });
   }
   if (request.delay !== undefined) {
     delay = request.delay;
@@ -55,6 +83,6 @@ chrome.runtime.onMessage.addListener(function(request) {
       clearInterval(refreshIntervalId); // Clear the previous interval
       refreshIntervalId = setInterval(refreshItems, delay); // Start a new interval with the updated delay
     }
+    chrome.runtime.sendMessage({ type: 'saveSettings', settings: { delay: delay } });
   }
 });
-
