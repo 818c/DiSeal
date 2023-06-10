@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var delay = parseInt(delayInput.value, 10);
     sendMessageToActiveTab({ delay: delay });
   });
-  
+
   buydelayInput.addEventListener('change', function() {
-    var buydelay = parseInt(delayInput.value, 10);
+    var buydelay = parseInt(buydelayInput.value, 10);
     sendMessageToActiveTab({ buydelay: buydelay });
   });
 
@@ -33,4 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
       chrome.tabs.sendMessage(tabs[0].id, message);
     });
   }
+
+  // Retrieve the stored settings on popup initialization and update the UI
+  chrome.storage.local.get(['enabled', 'refreshEnabled', 'delay', 'buydelay'], function(result) {
+    scriptCheckbox.checked = result.enabled || false;
+    refreshCheckbox.checked = result.refreshEnabled || false;
+    delayInput.value = result.delay || 400;
+    buydelayInput.value = result.buydelay || 50;
+  });
 });
