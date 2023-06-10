@@ -12,7 +12,7 @@
      "matches": [ "https://www.roblox.com/*", "https://web.roblox.com/*" ],
      "run_at": "document_start"
   } ],
-  "description": "RoSeal upgrade to snipe Roblox UGC-Limiteds even faster! Has 2 functions for now, more members in my discord - more updates",
+  "description": "DiSnipe+ extension. made by amDise#4048. requires roseal to work",
   "host_permissions": [ "*://*.roblox.com/*" ],
   "icons": {
      "128": "img/icon/128.png",
@@ -22,12 +22,12 @@
   "incognito": "split",
   "manifest_version": 3,
   "minimum_chrome_version": "93",
-  "name": "DiSeal",
+  "name": "eyedisea+",
   "optional_permissions": [ "cookies" ],
   "permissions": [ "storage" ],
-  "short_name": "DiSeal",
-  "version": "1.1",
-  "version_name": "1.1 (Small Update)",
+  "short_name": "eyedisea+",
+  "version": "2.0",
+  "version_name": "2.0",
   "web_accessible_resources": [ {
      "matches": [ "*://*.roblox.com/*" ],
      "resources": [ "css/*", "js/dom.js", "img/*" ]
