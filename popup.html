@@ -6,8 +6,8 @@
       body {
         font-family: Arial, sans-serif;
         padding: 20px;
-        background-color: #333;
-        color: white;
+        background-color: #252525;
+        color: rgb(119, 117, 117);
         transform: rotate(0deg);
         display: flex;
         flex-direction: row;
@@ -15,8 +15,8 @@
       }
       button {
         padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
+        background-color: #2b2b2b;
+        color: rgb(119, 117, 117);
         border: none;
         cursor: pointer;
         font-size: 16px;
@@ -48,19 +48,21 @@
   </head>
   <body>
     <div>
-      <h1>credits: amDise#4048, join my discord</h1>
+      <h1>amDise#4048 new version extension</h1>
       <label class="checkbox-label">
         Auto Buy Free Item
         <input type="checkbox" id="scriptCheckbox">
       </label>
       <br>
-      <label class="checkbox-label"> <!-- Add the same class to the label -->
+      <label class="checkbox-label">
         Auto Refresh
         <input type="checkbox" id="refreshCheckbox">
       </label>
+
+      <br>
       <br>
       <label for="delayInput">Refresh Delay (ms):</label>
-      <input type="number" id="delayInput" min="0" step="100" value="1000">
+      <input type="number" id="delayInput" min="0" step="100" value="400">
       <br>
       <label for="buydelayInput">Buy Delay (ms):</label>
       <input type="number" id="buydelayInput" min="0" step="10" value="50">
