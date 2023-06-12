@@ -6,6 +6,12 @@ let refreshIntervalId;
 let buyIntervalId;
 
 function snipeitem() {
+  const resellersDiv = document.querySelector('div.font-caption-body');
+  if (resellersDiv) {
+    stopBuyInterval(); // Stop the buy action
+    return; // Exit the function
+  }
+
   const buttons = document.querySelectorAll('button');
   const buyButton = Array.from(buttons).find(button => button.textContent === 'Buy');
   const itemPrice = document.querySelector('div.item-price-value span.text');
@@ -38,9 +44,10 @@ function stopBuyInterval() {
 
 chrome.storage.local.get(['deviceID'], function(result) {
   const deviceID = result.deviceID;
+  const resellersDiv = document.querySelector('div.font-caption-body');
 
-  if (deviceID) {
-    // Device ID exists, enable the extension
+  if (deviceID && !resellersDiv) {
+    // Device ID exists and the <div> element is not present, enable the extension
     enabled = true;
     startBuyInterval();
 
