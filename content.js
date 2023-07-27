@@ -9,16 +9,16 @@ function snipeitem() {
   const buyButton = document.querySelector('button.btn-growth-lg.btn-fixed-width-lg.PurchaseButton');
   const itemPrice = document.querySelector('div.item-price-value span.text');
   const getNowButton = document.querySelector('.modal-button'); // Get the "Get Now" button
+  const quantityLeftMessage = document.querySelector('div.font-caption-body');
 
-  if (enabled && buyButton && itemPrice && itemPrice.textContent === 'Free') {
+  if (enabled && buyButton && itemPrice && itemPrice.textContent === 'Free' && !quantityLeftMessage.textContent.includes('Quantity Left: 0/')) {
     buyButton.click();
     // Add a small delay to allow the modal to open before clicking the "Get Now" button
     setTimeout(() => {
       getNowButton.click();
-    }, 1);
+    }, 10);
   }
 }
-
 
 
 function refreshItems() {
