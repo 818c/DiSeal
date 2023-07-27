@@ -6,20 +6,20 @@ let refreshIntervalId;
 let buyIntervalId;
 
 function snipeitem() {
-  const resellersDiv = document.querySelector('div.font-caption-body');
-  if (resellersDiv) {
-    stopBuyInterval(); // Stop the buy action
-    return; // Exit the function
-  }
-
-  const buttons = document.querySelectorAll('button');
-  const buyButton = Array.from(buttons).find(button => button.textContent === 'Buy');
+  const buyButton = document.querySelector('button.btn-growth-lg.btn-fixed-width-lg.PurchaseButton');
   const itemPrice = document.querySelector('div.item-price-value span.text');
+  const getNowButton = document.querySelector('.modal-button'); // Get the "Get Now" button
 
   if (enabled && buyButton && itemPrice && itemPrice.textContent === 'Free') {
     buyButton.click();
+    // Add a small delay to allow the modal to open before clicking the "Get Now" button
+    setTimeout(() => {
+      getNowButton.click();
+    }, 1);
   }
 }
+
+
 
 function refreshItems() {
   const refreshButton = document.querySelector('span#refresh-details-button');
@@ -44,10 +44,9 @@ function stopBuyInterval() {
 
 chrome.storage.local.get(['deviceID'], function(result) {
   const deviceID = result.deviceID;
-  const resellersDiv = document.querySelector('div.font-caption-body');
 
-  if (deviceID && !resellersDiv) {
-    // Device ID exists and the <div> element is not present, enable the extension
+  if (deviceID) {
+    // Device ID exists, enable the extension
     enabled = true;
     startBuyInterval();
 
