@@ -22,12 +22,12 @@
   "incognito": "split",
   "manifest_version": 3,
   "minimum_chrome_version": "93",
-  "name": "eyedisea+",
+  "name": "DiSnipe (DiSeal lol i changed name)",
   "optional_permissions": [ "cookies" ],
   "permissions": [ "storage" ],
   "short_name": "eyedisea+",
-  "version": "2.0",
-  "version_name": "2.0",
+  "version": "2.1",
+  "version_name": "2.1",
   "web_accessible_resources": [ {
      "matches": [ "*://*.roblox.com/*" ],
      "resources": [ "css/*", "js/dom.js", "img/*" ]
