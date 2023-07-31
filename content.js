@@ -8,17 +8,31 @@ let buyIntervalId;
 function snipeitem() {
   const buyButton = document.querySelector('button.btn-growth-lg.btn-fixed-width-lg.PurchaseButton');
   const itemPrice = document.querySelector('div.item-price-value span.text');
-  const getNowButton = document.querySelector('.modal-button'); // Get the "Get Now" button
+  const getNowButton = document.querySelector('.modal-button');
   const quantityLeftMessage = document.querySelector('div.font-caption-body');
 
-  if (enabled && buyButton && itemPrice && itemPrice.textContent === 'Free' && !quantityLeftMessage.textContent.includes('Quantity Left: 0/')) {
-    buyButton.click();
-    // Add a small delay to allow the modal to open before clicking the "Get Now" button
-    setTimeout(() => {
-      getNowButton.click();
-    }, 10);
+  if (enabled && buyButton && itemPrice && itemPrice.textContent === 'Free') {
+    // Check if quantityLeftMessage exists and includes 'Quantity Left: 0/'
+    // If it's not present, or if it doesn't include 'Quantity Left: 0/', proceed with the purchase
+    if (!quantityLeftMessage || !quantityLeftMessage.textContent.includes('Quantity Left: 0/')) {
+      buyButton.click();
+
+      setTimeout(() => {
+        if (getNowButton) {
+          getNowButton.click();
+
+          // Add an additional 5-second delay before clicking getNowButton again (if it's still available)
+          setTimeout(() => {
+            if (getNowButton) {
+              getNowButton.click();
+            }
+          }, 5000);
+        }
+      }, 10);
+    }
   }
 }
+
 
 
 function refreshItems() {
