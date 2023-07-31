@@ -1,75 +1,133 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>DiSnipe</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 20px;
-        background-color: #252525;
-        color: rgb(119, 117, 117);
-        transform: rotate(0deg);
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-      }
-      button {
-        padding: 10px 20px;
-        background-color: #2b2b2b;
-        color: rgb(119, 117, 117);
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-      }
-      label {
-        display: block;
-        margin-bottom: 1px;
-      }
-      input[type="number"] {
-        width: 70px;
-      }
-      .checkbox-label {
-        display: flex;
-        align-items: center;
-      }
-      .checkbox-label input[type="checkbox"] {
-        margin-left: 15px;
-        transform: scale(2); /* Double the size of all checkboxes */
-      }
-      #discordButton {
-        margin-top: 20px;
-      }
-      h1 {
-        font-size: 24px;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <h1>amDise#4048 new version extension</h1>
-      <label class="checkbox-label">
-        Auto Buy Free Item
-        <input type="checkbox" id="scriptCheckbox">
-      </label>
-      <br>
-      <label class="checkbox-label">
-        Auto Refresh
-        <input type="checkbox" id="refreshCheckbox">
-      </label>
-
-      <br>
-      <br>
-      <label for="delayInput">Refresh Delay (ms):</label>
-      <input type="number" id="delayInput" min="0" step="100" value="400">
-      <br>
-      <label for="buydelayInput">Buy Delay (ms):</label>
-      <input type="number" id="buydelayInput" min="0" step="10" value="50">
-      <br>
-      <button id="discordButton">Join Discord For Updates</button>
+<head>
+  <title>DiSeal</title>
+  <link rel="stylesheet" href="./popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      padding: 10px;
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+    }
+    #container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #303030;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column; 
+      align-items: center; 
+    }
+    h1 {
+      font-size: 32px;
+      margin: 3px 0 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      text-align: center;
+    }
+    input[type="number"] {
+      width: 100%;
+      font-size: 14px;
+      padding: 8px;
+      border: 1px solid #555555;
+      background-color: #252525;
+      color: #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      justify-content: center;
+    }
+    .checkbox-label input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.2);
+    }
+    .buttons {
+      margin-top: 20px;
+      width: 100%;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #f0f0f0;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 8px 0;
+      border-radius: 8px;
+      transition: background-color 0.2s ease-in-out;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #discordButton {
+      background-color: #7289DA;
+    }
+    #discordButton:hover {
+      background-color: #677BC4;
+    }
+    body.dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+    .dark-mode #container {
+      background-color: #252525;
+    }
+    .dark-mode h1 {
+      color: #f0f0f0;
+    }
+    .dark-mode label {
+      color: #dcdcdc;
+    }
+    .dark-mode input[type="number"] {
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+    }
+    .dark-mode .checkbox-label {
+      color: #dcdcdc;
+    }
+    .dark-mode .buttons {
+      margin-top: 20px;
+    }
+    .dark-mode button {
+      background-color: #4CAF50;
+      color: #f0f0f0;
+    }
+    .dark-mode button:hover {
+      background-color: #45a049;
+    }
+    .dark-mode #discordButton {
+      background-color: #7289DA;
+    }
+    .dark-mode #discordButton:hover {
+      background-color: #677BC4;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>DiSeal</h1>
+    <label class="checkbox-label"><input type="checkbox" id="scriptCheckbox"> Auto Buy Free Item</label>
+    <label class="checkbox-label"><input type="checkbox" id="refreshCheckbox"> Auto Refresh</label>
+    <label for="delayInput">Refresh Delay (ms):</label>
+    <input type="number" id="delayInput" min="0" step="100" value="400">
+    <label for="buydelayInput">Buy Delay (ms):</label>
+    <input type="number" id="buydelayInput" min="0" step="10" value="50">
+    <div class="buttons">
+      <button id="discordButton"><i class="fab fa-discord"></i> Join Discord For Updates</button>
     </div>
-
-    <script src="popup.js"></script>
-  </body>
+  </div>
+  <script src="popup.js"></script>
+</body>
 </html>
